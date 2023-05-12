@@ -1,12 +1,16 @@
 <template>
-  <form @submit.prevent="sendPostRequest">
+  <!-- <form @submit.prevent="sendPostRequest">
     <label for="title">Title:</label>
     <input type="text" id="title" v-model="title">
     <label for="body">Body:</label>
     <textarea id="body" v-model="body"></textarea>
     <button type="submit">Submit</button>
-  </form>
-  <img v-bind:src="'data:image/jpeg;base64,'+base64String" />
+  </form> -->
+  <input v-model="name" type="text">
+  <button @click="sendPostRequest">
+    Generate
+  </button>
+  <img v-bind:src="'data:image/jpeg;base64,' + base64String" />
 </template>
 
 <script setup>
@@ -17,9 +21,12 @@ import { ref } from 'vue';
 const base64String = ref(''); // Replace with your Base64 string
 const title = ref('');
 const body = ref('');
-const tags = ref([{
-  text: "Cat in space"
-}]);
+const name = ref('')
+const tags = ref([
+  {
+    text: name
+  }
+]);
 
 const sendPostRequest = async () => {
   const endpoint = 'https://api.stability.ai/v1/generation/stable-diffusion-v1-5/text-to-image';
