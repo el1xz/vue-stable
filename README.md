@@ -1,6 +1,8 @@
 # vue-stable
 
-This template should help get you started developing with Vue 3 in Vite.
+The app is designed to generate pictures on demand using artificial intelligence.
+In our case, we use the REST API from the Stability AI service.
+For more info: https://platform.stability.ai/rest-api
 
 ## Recommended IDE Setup
 
