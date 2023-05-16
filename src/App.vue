@@ -89,8 +89,8 @@ const tags = ref([
 const sendPostRequest = async () => {
   skeleton.value = true;
   warning.value = '';
-  const endpoint = 'https://api.stability.ai/v1/generation/stable-diffusion-v1-5/text-to-image';
-  const token = 'sk-m6d25QqF4hDQOMkzNZ4gb7PUmvgBI42s8D7M6qV8mjKBIWxe'; // Replace with your bearer token
+  const endpoint = 'https://api.stability.ai/v1/generation/stable-diffusion-xl-beta-v2-2-2/text-to-image';
+  const token = process.env.VUE_APP_STABLE_SECRET_API; // Replace with your bearer token
   const headers = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
