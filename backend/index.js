@@ -26,17 +26,20 @@ app.post("/getimage", async (req, res) => {
   await page.click("button[type=submit]");
 
   try {
+    console.log("Waiting for image to " + text);
     await page.waitForSelector("img.max-w-sm");
+    const elementHandle = await page.$("img.max-w-sm");
+    const screenshot = await elementHandle.screenshot();
+  
+    const base64Image = screenshot.toString("base64");
+    res.status(200).json({ imageBase64: base64Image });
+    console.log("Done!");
+
+    await browser.close();
+
   } catch (error) {
     return res.status(500).send(error.name);
   }
-  const elementHandle = await page.$("img.max-w-sm");
-  const screenshot = await elementHandle.screenshot();
-
-  await browser.close();
-
-  const base64Image = screenshot.toString("base64");
-  res.status(200).json({ imageBase64: base64Image });
 
 //   res.writeHead(200, {
 //     "Content-Type": "image/png",

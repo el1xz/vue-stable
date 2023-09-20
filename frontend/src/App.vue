@@ -7,10 +7,14 @@ const imageUrl = ref(null);
 const generatePromt = ref(null);
 
 const makeFetch = async () => {
-  const response = await axios.post('http://localhost:3000/getimage', {
+  try {
+    const response = await axios.post('http://localhost:3000/getimage', {
     text: generatePromt.value
   });
   imageUrl.value = "data:image/png;base64," + response.data.imageBase64;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 </script>
