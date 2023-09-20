@@ -3,31 +3,28 @@ import axios from "axios";
 import {onMounted, ref} from "vue";
 
 
-const data = ref(null);
 const imageUrl = ref(null);
+const generatePromt = ref(null);
 
 const makeFetch = async () => {
   const response = await axios.post('http://localhost:3000/getimage', {
-    text:"a supercar"
+    text: generatePromt.value
   });
   imageUrl.value = "data:image/png;base64," + response.data.imageBase64;
 }
-
-onMounted(() => {
-  makeFetch()
-})
 
 </script>
 
 <template>
   <div class="prompt_wrapper">
     <div>
-      <p>
-        Clear Project
-      </p>
       <div>
         <img :src="imageUrl" alt="Image">
       </div>
+      <button @click="makeFetch">
+        Generate Image
+      </button>
+      <input v-model="generatePromt" type="text">
     </div>
   </div>
   
