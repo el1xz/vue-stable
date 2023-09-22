@@ -9,8 +9,11 @@
     "host": "vite --host"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.16",
     "axios": "^1.4.0",
+    "postcss": "^8.4.30",
     "primevue": "^3.34.1",
+    "tailwindcss": "^3.3.3",
     "vue": "^3.2.47"
   },
   "devDependencies": {
