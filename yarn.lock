@@ -343,6 +343,11 @@ postcss@^8.1.10, postcss@^8.4.27:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
+primevue@^3.34.1:
+  version "3.34.1"
+  resolved "https://registry.yarnpkg.com/primevue/-/primevue-3.34.1.tgz#2f95428424d7805bd49cbea75707862988b8427d"
+  integrity sha512-5QPy8I+TMYSQgC0Bs/9vINsOVjgCOQFAr6uz49Wzcj8u04qJ2mG/z6OhAana+f4yKTTHVwHLVnuGkrIp/nI9DA==
+
 proxy-from-env@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.1.0.tgz#e102f16ca355424865755d2c9e8ea4f24d58c3e2"
