@@ -161,7 +161,7 @@ const makeFetch = async () => {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss">
 .prompt {
   display: flex;
   align-items: center;
@@ -191,5 +191,13 @@ const makeFetch = async () => {
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.p-image {
+  height: 100%;
+  img {
+    height: 100%;
+    object-fit: contain;
+  }
 }
 </style>
