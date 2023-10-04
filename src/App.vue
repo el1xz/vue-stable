@@ -10,6 +10,7 @@ import Dropdown from "primevue/dropdown";
 import Slider from "primevue/slider";
 
 const imageUrl = ref(null);
+const imageUrl2 = ref(null);
 const generatePrompt = ref(null);
 const negativePrompt = ref(
   "(deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, (mutated hands and fingers:1.4), disconnected limbs, mutation, mutated, ugly, disgusting, blurry, amputation"
@@ -36,8 +37,9 @@ const schedulers_list = ref([
 
 const pending = ref(false);
 
-const url = "https://api.segmind.com/v1/sd1.5-dreamshaper";
-const api_key = "SG_6b5964f90a8b5e73";
+const url = "https://api.segmind.com/v1/sd1.5-reliberate";
+const api_key = ref("");
+const key_arr = ["SG_6b5964f90a8b5e73", "SG_220e3d0f989fc657", "SG_1b7b452276241b9b", "SG_51c6925f3a7e905e"];
 
 const width_slide = ref(512);
 const height_slide = ref(512);
@@ -64,19 +66,29 @@ watch(scheduler, () => {
 });
 
 const makeFetch = async () => {
+  api_key.value = key_arr[Math.floor(Math.random() * key_arr.length)];
   try {
     imageUrl.value = null;
     pending.value = true;
     const response = await axios.post(url, data.value, {
-      responseType: "arraybuffer",
+      // responseType: "arraybuffer",
+      responseType: "blob",
       headers: {
-        "x-api-key": api_key,
+        "x-api-key": api_key.value,
       },
     });
-    const b64 = btoa(String.fromCharCode(...new Uint8Array(response.data)));
-    const imgData =
-      "data:" + response.headers["content-type"] + ";base64," + b64;
-    imageUrl.value = imgData;
+    const reader = new FileReader();
+    reader.readAsDataURL(response.data);
+
+    reader.onloadend = () => {
+      imageUrl2.value = reader.result;
+    }
+    // const b64 = btoa(String.fromCharCode(...new Uint8Array(response.data)));
+    // const imgData =
+    //   "data:" + response.headers["content-type"] + ";base64," + b64;
+    // imageUrl.value = imgData;
+
+    // console.log(response.data);
     pending.value = false;
   } catch (error) {
     console.log(error);
@@ -91,8 +103,8 @@ const makeFetch = async () => {
       <div class="image">
         <Skeleton v-if="pending" width="100%" height="100%"></Skeleton>
         <Image
-          v-if="imageUrl"
-          :src="imageUrl"
+          v-if="imageUrl2"
+          :src="imageUrl2"
           alt="Image"
           height="250"
           width="250"
