@@ -11,7 +11,7 @@ export default () => {
 
   return defineConfig({
     server: {
-      port: 8080
+      port: 8800
     },
     plugins: [vue()],
     resolve: {
