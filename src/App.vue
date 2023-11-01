@@ -37,7 +37,63 @@ const schedulers_list = ref([
 
 const pending = ref(false);
 
-const url = "https://api.segmind.com/v1/sd1.5-reliberate";
+const models = ref([
+  {
+    name: "Reliberate",
+    url: "https://api.segmind.com/v1/sd1.5-reliberate",
+  },
+  {
+    name: "SDXL1.0",
+    url: "https://api.segmind.com/v1/sdxl1.0-txt2img",
+  },
+  {
+    name: "Revanimated",
+    url: "https://api.segmind.com/v1/sd1.5-revanimated",
+  },
+  {
+    name: "Kandinsky 2.2",
+    url: "https://api.segmind.com/v1/kandinsky2.2-txt2img",
+  },
+  {
+    name: "Cartoon",
+    url: "https://api.segmind.com/v1/sd1.5-disneyB",
+  },
+  {
+    name: "Dream Shaper",
+    url: "https://api.segmind.com/v1/sd1.5-dreamshaper",
+  },
+  {
+    name: "Cyber Realistic",
+    url: "https://api.segmind.com/v1/sd1.5-cyberrealistic",
+  },
+  {
+    name: "Juggernaut Final",
+    url: "https://api.segmind.com/v1/sd1.5-juggernaut",
+  },
+  {
+    name: "Paragon",
+    url: "https://api.segmind.com/v1/sd1.5-paragon",
+  },
+  {
+    name: "Majicmix",
+    url: "https://api.segmind.com/v1/sd1.5-majicmix",
+  },
+  {
+    name: "Realistic Vision",
+    url: "https://api.segmind.com/v1/sd1.5-realisticvision",
+  },
+  {
+    name: "Realvis SDXL",
+    url: "https://api.segmind.com/v1/sdxl1.0-realvis",
+  }
+])
+
+const url = ref(
+  {
+    name: "Reliberate",
+    url: "https://api.segmind.com/v1/sd1.5-reliberate",
+  }
+);
 const api_key = ref("");
 const key_arr = ["SG_6b5964f90a8b5e73", "SG_220e3d0f989fc657", "SG_1b7b452276241b9b", "SG_51c6925f3a7e905e"];
 
@@ -70,7 +126,7 @@ const makeFetch = async () => {
   try {
     imageUrl.value = null;
     pending.value = true;
-    const response = await axios.post(url, data.value, {
+    const response = await axios.post(url.value.url, data.value, {
       // responseType: "arraybuffer",
       responseType: "blob",
       headers: {
@@ -125,6 +181,13 @@ const makeFetch = async () => {
           />
           <label for="negative_prompt">negative prompt</label>
         </span>
+        <Dropdown
+          v-model="url"
+          :optionValue="models.name"
+          :options="models"
+          optionLabel="name"
+          placeholder="scheduler"
+        />
         <Dropdown
           v-model="scheduler"
           :optionValue="schedulers_list.name"
