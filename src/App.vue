@@ -11,7 +11,7 @@ import Slider from "primevue/slider";
 
 const imageUrl = ref(null);
 const imageUrl2 = ref(null);
-const generatePrompt = ref(null);
+const generatePrompt = ref("a man");
 const negativePrompt = ref(
   "(deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, (mutated hands and fingers:1.4), disconnected limbs, mutation, mutated, ugly, disgusting, blurry, amputation"
 );
@@ -90,15 +90,15 @@ const models = ref([
 
 const url = ref(
   {
-    name: "Reliberate",
-    url: "https://api.segmind.com/v1/sd1.5-reliberate",
+    name: "Realistic Vision",
+    url: "https://api.segmind.com/v1/sd1.5-realisticvision",
   }
 );
 const api_key = ref("");
 const key_arr = ["SG_6b5964f90a8b5e73", "SG_220e3d0f989fc657", "SG_1b7b452276241b9b", "SG_51c6925f3a7e905e"];
 
 const width_slide = ref(512);
-const height_slide = ref(512);
+const height_slide = ref(768);
 
 const data = ref({
   prompt: generatePrompt,
